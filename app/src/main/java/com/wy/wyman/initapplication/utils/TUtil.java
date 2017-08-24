@@ -11,9 +11,8 @@ public class TUtil {
             return ((Class<T>) ((ParameterizedType) (o.getClass()
                     .getGenericSuperclass())).getActualTypeArguments()[i])
                     .newInstance();
-        } catch (InstantiationException e) {
-        } catch (IllegalAccessException e) {
-        } catch (ClassCastException e) {
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return null;
     }
