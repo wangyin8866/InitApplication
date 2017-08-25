@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 
 import com.wy.wyman.initapplication.base.baseapp.AppManager;
+import com.wy.wyman.initapplication.base.baseapp.BaseApplication;
 import com.wy.wyman.initapplication.base.baserx.RxManager;
 import com.wy.wyman.initapplication.utils.TUtil;
 import com.wy.wyman.initapplication.utils.immerse.ImmersionBar;
@@ -31,12 +32,12 @@ public abstract class BaseActivity<T extends BasePresenter, E> extends AppCompat
         mRxManager = new RxManager();
         doBeforeSetContentView();
         setContentView(getLayoutId());
-        mContext = this;
+        mContext = BaseApplication.getAppContext();
         mPresenter = TUtil.getT(this, 0);
         mModel = TUtil.getT(this, 1);
 
         if (mPresenter != null) {
-            mPresenter.mContext = this;
+            mPresenter.mContext = mContext;
             mPresenter.attach(this);
             mPresenter.setVM(mModel);
         }

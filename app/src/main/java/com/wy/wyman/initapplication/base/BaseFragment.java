@@ -1,5 +1,6 @@
 package com.wy.wyman.initapplication.base;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.wy.wyman.initapplication.base.baseapp.BaseApplication;
 import com.wy.wyman.initapplication.base.baserx.RxManager;
 import com.wy.wyman.initapplication.utils.TUtil;
 import com.wy.wyman.initapplication.widget.LoadingDialog;
@@ -55,18 +57,19 @@ public abstract class BaseFragment<T extends BasePresenter, E> extends Fragment 
     public T mPresenter;
     public E mModel;
     public RxManager mRxManager;
-
+    public Context mContext;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (rootView == null)
             rootView = inflater.inflate(getLayoutResource(), container, false);
         mRxManager = new RxManager();
+        mContext = BaseApplication.getAppContext();
         mPresenter = TUtil.getT(this, 0);
         mModel = TUtil.getT(this, 1);
 
         if (mPresenter != null) {
-            mPresenter.mContext = this.getActivity();
+            mPresenter.mContext = mContext;
             mPresenter.attach(this);
             mPresenter.setVM(mModel);
         }
