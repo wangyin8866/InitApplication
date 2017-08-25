@@ -17,7 +17,7 @@ import com.wy.wyman.initapplication.utils.immerse.ImmersionBar;
  * Created by zj on 2017/8/24.
  */
 
-public abstract class BaseActivity<T extends BasePresenter,E > extends AppCompatActivity {
+public abstract class BaseActivity<T extends BasePresenter, E> extends AppCompatActivity {
     public T mPresenter;
     public E mModel;
     public Context mContext;
@@ -33,13 +33,16 @@ public abstract class BaseActivity<T extends BasePresenter,E > extends AppCompat
         setContentView(getLayoutId());
         mContext = this;
         mPresenter = TUtil.getT(this, 0);
-        mModel=TUtil.getT(this,1);
-        if(mPresenter!=null){
-            mPresenter.mContext=this;
+        mModel = TUtil.getT(this, 1);
+
+        if (mPresenter != null) {
+            mPresenter.mContext = this;
+            mPresenter.attach(this);
+            mPresenter.setVM(mModel);
         }
-        this.initPresenter();
         this.initView();
     }
+
     /**
      * 设置layout前配置
      */
@@ -54,35 +57,41 @@ public abstract class BaseActivity<T extends BasePresenter,E > extends AppCompat
         SetStatusBarColor();
 
     }
+
     /*********************子类实现*****************************/
     //获取布局文件
     public abstract int getLayoutId();
-    //简单页面无需mvp就不用管此方法即可,完美兼容各种实际场景的变通
-    public abstract void initPresenter();
+
+
     //初始化view
     public abstract void initView();
+
     /**
      * 沉浸式状态栏
      */
-    protected void SetStatusBarColor(){
-        mImmersionBar=ImmersionBar.with(this);
+    protected void SetStatusBarColor() {
+        mImmersionBar = ImmersionBar.with(this);
         mImmersionBar.statusBarDarkFont(true).init();
     }
+
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        isConfigChange=true;
+        isConfigChange = true;
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (mPresenter != null)
+
+        if (mPresenter != null) {
             mPresenter.onDestroy();
-        if(mRxManager!=null) {
+            mPresenter.detach();
+        }
+        if (mRxManager != null) {
             mRxManager.clear();
         }
-        if(!isConfigChange){
+        if (!isConfigChange) {
             AppManager.getAppManager().finishActivity(this);
         }
     }

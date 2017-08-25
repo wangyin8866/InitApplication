@@ -6,7 +6,8 @@ import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-import static com.wy.wyman.initapplication.base.BaseModel.map;
+import static com.wy.wyman.initapplication.api.Api.map;
+
 
 /**
  * RxJava调度管理

@@ -13,6 +13,8 @@ import com.wy.wyman.initapplication.utils.NetWorkUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Cache;
@@ -33,6 +35,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * on 2016.06.15:47
  */
 public class Api {
+    public static Map<String, String> map = new HashMap<>();
     //读超时长，单位：毫秒
     public static final int READ_TIME_OUT = 7676;
     //连接时长，单位：毫秒

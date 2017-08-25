@@ -17,6 +17,7 @@ import com.wy.wyman.initapplication.widget.LoadingDialog;
  * Created by xsf
  * on 2016.07.12:38
  */
+
 /***************使用例子*********************/
 //1.mvp模式
 //public class SampleFragment extends BaseFragment<NewsChanelPresenter, NewsChannelModel>implements NewsChannelContract.View {
@@ -49,7 +50,7 @@ import com.wy.wyman.initapplication.widget.LoadingDialog;
 //    public void initView() {
 //    }
 //}
-public abstract  class BaseFragment<T extends BasePresenter, E extends BaseModel> extends Fragment {
+public abstract class BaseFragment<T extends BasePresenter, E> extends Fragment {
     protected View rootView;
     public T mPresenter;
     public E mModel;
@@ -60,20 +61,25 @@ public abstract  class BaseFragment<T extends BasePresenter, E extends BaseModel
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         if (rootView == null)
             rootView = inflater.inflate(getLayoutResource(), container, false);
-        mRxManager=new RxManager();
+        mRxManager = new RxManager();
         mPresenter = TUtil.getT(this, 0);
-        mModel= TUtil.getT(this,1);
-        if(mPresenter!=null){
-            mPresenter.mContext=this.getActivity();
+        mModel = TUtil.getT(this, 1);
+
+        if (mPresenter != null) {
+            mPresenter.mContext = this.getActivity();
+            mPresenter.attach(this);
+            mPresenter.setVM(mModel);
         }
-        initPresenter();
-        initView();
+        this.initView();
         return rootView;
     }
+
     //获取布局文件
     protected abstract int getLayoutResource();
+
     //简单页面无需mvp就不用管此方法即可,完美兼容各种实际场景的变通
     public abstract void initPresenter();
+
     //初始化view
     protected abstract void initView();
 
@@ -118,7 +124,6 @@ public abstract  class BaseFragment<T extends BasePresenter, E extends BaseModel
     }
 
 
-
     /**
      * 开启加载进度条
      */
@@ -143,15 +148,16 @@ public abstract  class BaseFragment<T extends BasePresenter, E extends BaseModel
     }
 
 
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        if (mPresenter != null)
+
+        if (mPresenter != null) {
+            mPresenter.detach();
             mPresenter.onDestroy();
+        }
         mRxManager.clear();
     }
-
 
 
 }
