@@ -51,7 +51,7 @@ public class RxManager {
      * 单个presenter生命周期结束，取消订阅和所有rxbus观察
      */
     public void clear() {
-        mCompositeSubscription.unsubscribe();// 取消所有订阅
+        mCompositeSubscription.unsubscribe();// 取消所有订阅   使用clear()方法会导致mCompositeSubscription不能重用，所以使用unsubscribe()方法
         for (Map.Entry<String, Observable<?>> entry : mObservables.entrySet()) {
             mRxBus.unregister(entry.getKey(), entry.getValue());// 移除rxbus观察
         }
