@@ -19,7 +19,6 @@ import java.util.concurrent.TimeUnit;
 
 import okhttp3.Cache;
 import okhttp3.CacheControl;
-import okhttp3.Headers;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -133,7 +132,6 @@ public class Api {
             public Response intercept(Chain chain) throws IOException {
                 Request request = chain.request();
                 Response response = chain.proceed(chain.request());
-                Headers responseHeaders = response.headers();
                 okhttp3.MediaType mediaType = response.body().contentType();
                 ResponseBody originalBody = response.body();
                 if (null != originalBody) {
