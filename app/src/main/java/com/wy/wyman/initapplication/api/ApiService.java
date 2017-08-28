@@ -9,8 +9,7 @@ import rx.Observable;
 
 /**
  * des:ApiService
- * Created by xsf
- * on 2016.06.15:47
+ * Created by wy
  */
 public interface ApiService {
     @FormUrlEncoded

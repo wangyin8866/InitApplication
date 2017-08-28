@@ -16,8 +16,7 @@ import com.wy.wyman.initapplication.widget.LoadingDialog;
 
 /**
  * des:基类fragment
- * Created by xsf
- * on 2016.07.12:38
+ * Created by wy
  */
 
 /***************使用例子*********************/

@@ -15,7 +15,7 @@ import com.wy.wyman.initapplication.utils.TUtil;
 import com.wy.wyman.initapplication.utils.immerse.ImmersionBar;
 
 /**
- * Created by zj on 2017/8/24.
+ * Created by wy on 2017/8/24.
  */
 
 public abstract class BaseActivity<T extends BasePresenter, E> extends AppCompatActivity {

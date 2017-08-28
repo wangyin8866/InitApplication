@@ -7,7 +7,7 @@ import com.wy.wyman.initapplication.base.baserx.RxManager;
 import java.lang.ref.WeakReference;
 
 /**
- * Created by zj on 2017/8/24.
+ * Created by wy on 2017/8/24.
  */
 
 public class BasePresenter<T, E> {

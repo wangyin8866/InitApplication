@@ -5,7 +5,7 @@ import com.wy.wyman.initapplication.model.HomeModel;
 import com.wy.wyman.initapplication.presenter.HomePresenter;
 
 /**
- * Created by zj on 2017/8/25.
+ * Created by wy on 2017/8/25.
  */
 
 public class TestActivity extends BaseActivity<HomePresenter,HomeModel> {

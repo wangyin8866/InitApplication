@@ -30,8 +30,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * des:retorfit api
- * Created by xsf
- * on 2016.06.15:47
+ * Created by wy
  */
 public class Api {
     public static Map<String, String> map = new HashMap<>();

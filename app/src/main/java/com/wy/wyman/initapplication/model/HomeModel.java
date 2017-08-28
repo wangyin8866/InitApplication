@@ -9,7 +9,7 @@ import rx.Observable;
 import static com.wy.wyman.initapplication.api.Api.map;
 
 /**
- * Created by zj on 2017/8/24.
+ * Created by wy on 2017/8/24.
  */
 
 public class HomeModel  {
