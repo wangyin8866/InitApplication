@@ -39,7 +39,7 @@ public class Api {
     //连接时长，单位：毫秒
     public static final int CONNECT_TIME_OUT = 7676;
     public Retrofit retrofit;
-    public ApiService movieService;
+    public ApiService apiService;
     public OkHttpClient okHttpClient;
     private static SparseArray<Api> sRetrofitManager = new SparseArray<>(HostType.TYPE_COUNT);
 
@@ -161,7 +161,7 @@ public class Api {
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .baseUrl(ApiConstants.getHost(hostType))
                 .build();
-        movieService = retrofit.create(ApiService.class);
+        apiService = retrofit.create(ApiService.class);
     }
 
 
@@ -175,7 +175,7 @@ public class Api {
             retrofitManager = new Api(hostType);
             sRetrofitManager.put(hostType, retrofitManager);
         }
-        return retrofitManager.movieService;
+        return retrofitManager.apiService;
     }
 
 

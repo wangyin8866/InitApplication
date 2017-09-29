@@ -16,6 +16,7 @@ public class HomePresenter extends BasePresenter<HomeView,HomeModel> {
 
 
     public void fetch(String product_category_id, String page_index) {
+
         mRxManage.add(mModel.getData(product_category_id,page_index).subscribe(new RxSubscriber<Object>(mContext,true) {
             @Override
             protected void _onNext(Object s) {
